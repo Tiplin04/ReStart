@@ -6,12 +6,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "electron-builder",
+    "build": "vite build && electron-builder",
+    "preview": "concurrently \"electron .\" \"vite preview\"",
     "vite-build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "electron": "electron .",
-    "electron-dev": "concurrently \"npm:dev\" \"npm:electron\""
+    "lint": "eslint ."
   },
   "build": {
     "appId": "com.example.my-electron-app",
@@ -23,12 +21,13 @@
       "icon": "Artem.ico"
     },
     "directories": {
-      "output": "electron_dist"
+      "output": "build"
     }
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
@@ -36,6 +35,7 @@
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
     "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3",
     "electron": "^33.2.0",
     "electron-builder": "^25.1.8",
     "eslint": "^9.13.0",

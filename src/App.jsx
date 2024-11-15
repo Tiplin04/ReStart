@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import First from "./pages/First";
+import Second from "./pages/Second";
 
 function App() {
-    const handleYes = () => {
-        alert('Нажми Нє');
-    };
+  const [route, setRoute] = useState("first");
+  const [loading, setLoading] = useState(false);
 
-    const handleNo = () => {
-        window.electron.sendAction('no');
-    };
+  useEffect(() => {
+    window.electron.on("initial-data", (event, data) => {
+      setLoading(true);
+      console.log("Received data from main process:", data);
+      if (data.route === "second") {
+        setRoute("second");
+      }
+      setLoading(false);
+    });
 
-    return (
-<div style={{ display:'flex', alignItems: `center`, justifyContent: `center`, width: `100%`}}>
-<div style={{ textAlign: 'center'}}>
-            <h1>Ідеш в доту?</h1>
-            <button onClick={handleYes} style={{ margin: '10px', padding: '10px 20px' }}>
-                Да
-            </button>
-            <button onClick={handleNo} style={{ margin: '10px', padding: '10px 20px' }}>
-                Нє
-            </button>
-        </div>
-</div>
-    );
+    return () => {
+      window.electron.on("initial-data", () => {}); // Отписываемся от события
+    };
+  }, []);
+
+  if (loading) {
+    return <div>...loading</div>;
+  }
+
+  return <>{route === "first" ? <First /> : <Second />}</>;
 }
 
 export default App;
