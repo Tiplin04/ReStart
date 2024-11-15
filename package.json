@@ -1,0 +1,49 @@
+{
+  "name": "my-electron-app",
+  "private": true,
+  "version": "0.0.0",
+  "main": "electron.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "electron-builder",
+    "vite-build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm:dev\" \"npm:electron\""
+  },
+  "build": {
+    "appId": "com.example.my-electron-app",
+    "productName": "Go_Doty",
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "Artem.ico"
+    },
+    "directories": {
+      "output": "electron_dist"
+    }
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.1.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "vite": "^5.4.10",
+    "vite-plugin-electron": "^0.28.8"
+  }
+}
